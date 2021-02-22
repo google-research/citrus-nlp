@@ -7,7 +7,7 @@ with open("requirements.txt", encoding="utf-8") as req_fp:
 setup(
     name='citrus_nlp',
     version='0.1',
-    description='Post-hoc explanations for NLP model predictions/',
+    description='Citrus is an NLP library for perturbation-based feature attribution methods for text data.',
     author='Google Research',
     url='https://github.com/google-research/citrus-nlp',
     license='Apache License',

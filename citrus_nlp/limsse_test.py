@@ -107,7 +107,7 @@ class LimsseTest(parameterized.TestCase):
           'ngram_min_length': 1,
           'ngram_max_length': 6,
           'num_classes': 1,
-          'class_to_explain': 0,
+          'class_to_explain': None,
       }, {
           'testcase_name': 'correctly_identifies_important_tokens_for_2d_input',
           'sentence': 'It is a great movie but also somewhat bad .',
@@ -148,7 +148,7 @@ class LimsseTest(parameterized.TestCase):
 
       predictions = np.stack(predictions, axis=0)
       if num_classes == 1:
-        predictions = special.expit(predictions)
+        predictions = np.squeeze(special.expit(predictions), -1)
       else:
         predictions = special.softmax(predictions, axis=-1)
       return predictions

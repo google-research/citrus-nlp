@@ -177,7 +177,10 @@ def explain(
   # Get the n-grams as a list of strings.
   ngrams = extract_ngrams(tokens, start_positions, lengths)
   ngram_probs = predict_fn(ngrams)
-  ngram_probs = ngram_probs[:, class_to_explain]  # Only interested in 1 class.
+  if len(ngram_probs.shape) > 1:
+    assert class_to_explain is not None, \
+        'class_to_explain needs to be set when `predict_fn` returns a 2D tensor'
+    ngram_probs = ngram_probs[:, class_to_explain]  # Only care about 1 class.
 
   # Fit a linear model for the requested output class.
   model = linear_model.Ridge(
